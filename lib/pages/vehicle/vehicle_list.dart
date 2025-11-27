@@ -74,7 +74,7 @@ class VehicleList extends StatelessWidget {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return const ErrorDialog(description: "Данные обновлены успешно!");
+        return const ErrorDialog(description: "Data updated successfully!");
       });
   }
 

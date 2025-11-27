@@ -94,6 +94,7 @@ class VehicleItem extends StatelessWidget {
 
   Widget _state() {
     return InkWell(
+      onTap: onStateTap,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -108,7 +109,6 @@ class VehicleItem extends StatelessWidget {
           )
         ],
       ),
-      onTap: onStateTap,
     );
   }
 

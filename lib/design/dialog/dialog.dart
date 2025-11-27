@@ -23,7 +23,7 @@ class ErrorDialog extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             const Text(
-              'Информация',
+              'Information',
               style: head1TextStyle,
             ),
             const SizedBox(height: 8),

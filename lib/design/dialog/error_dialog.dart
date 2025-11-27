@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutterstolec/design/styles.dart';
-import 'package:flutterstolec/design/widgets/accent_button.dart';
+import 'package:dispatcher/design/styles.dart';
+import 'package:dispatcher/design/widgets/accent_button.dart';
 
 class ErrorDialog extends StatelessWidget {
   final String description;
