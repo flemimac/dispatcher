@@ -1,16 +1,41 @@
-# dispatcher
+### 🚗 Dispatcher
 
-A new Flutter project.
+Flutter приложение для управления автопарком с отслеживанием состояния транспортных средств и назначения водителей.
 
-## Getting Started
+### 📋 Описание
 
-This project is a starting point for a Flutter application.
+Dispatcher - это мобильное приложение для диспетчеров автопарка, которое позволяет:
 
-A few resources to get you started if this is your first Flutter project:
+- **Просматривать список всех транспортных средств** с фотографиями, маркой, назначенным водителем и текущим статусом
+- **Добавление транспортного средства** с выбором названия, бренда и типа транспортного средства
+- **Удаление транспортного средства** зажатием на плашку с информацией
+- **Быстро изменять водителя** для любого транспортного средства
+- **Обновлять статус** автомобиля в реальном времени
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### 📱 Скриншоты
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+| Главное меню | Выбор водителя | Выбор состояни |
+|-----|-----|-----|
+|<img width="390" height="895" alt="image" src="https://github.com/user-attachments/assets/7e366cf9-35e2-4680-812c-28c064e20db5" /> | <img width="390" height="895" alt="image" src="https://github.com/user-attachments/assets/b8a924da-0a89-4d89-9895-fb04620fe9f8" /> | <img width="390" height="895" alt="image" src="https://github.com/user-attachments/assets/79e2354e-1dfa-46bc-89ab-17f34c038dce" /> |
+| <p align="center">Добавление ТС</p> | <p align="center">Удаление ТС</p> | <p align="center">Добавление водителя</p> |
+| <img width="390" height="895" alt="image" src="https://github.com/user-attachments/assets/5de795c7-fe09-4ce3-9117-1898109f2b03" /> | <img width="390" height="895" alt="image" src="https://github.com/user-attachments/assets/7d3ea5a2-cca1-4c0d-9948-488bed867f3c" /> | <img width="390" height="895" alt="image" src="https://github.com/user-attachments/assets/3b887c72-19d5-43b4-98dd-7151234ee45c" /> |
+
+### 🛠 Установка и использование
+**1. Клонируйте репозиторий:**
+```bash
+git clone https://github.com/flemimac/dispatcher.git
+cd dispatcher
+```
+**2. Установите зависимости:**
+```bash
+flutter pub get
+```
+**3. Запустите приложение:**
+```bash
+flutter run
+```
+
+После запуска мобильного приложения следуйте инструкциям на экране.
+ 
+
+
