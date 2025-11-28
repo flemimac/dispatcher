@@ -17,7 +17,7 @@ class AccentButton extends StatelessWidget {
     return ElevatedButton(
         onPressed: onTap,
         style: ElevatedButton.styleFrom(
-            minimumSize: const Size(200, 40),
+            minimumSize: const Size(0, 40),
             maximumSize: const Size.fromHeight(40),
             backgroundColor: primaryColor,
             elevation: 0,

@@ -7,6 +7,8 @@ import 'package:dispatcher/pages/vehicle_state/vehicle_state_page.dart';
 import '../../design/dialog/dialog.dart';
 import '../../design/utils.dart';
 import '../../design/widgets/accent_button.dart';
+import '../../design/styles.dart';
+import '../../design/colors.dart';
 
 class VehicleList extends StatelessWidget {
   const VehicleList({super.key});
@@ -49,6 +51,9 @@ class VehicleList extends StatelessWidget {
           },
           onStateTap: () async {
             await _showVehicleStatePage(context, vehicle);
+          },
+          onLongPress: () async {
+            await _showDeleteVehicleDialog(context, vehicle);
           },
         );
       },
@@ -109,5 +114,73 @@ class VehicleList extends StatelessWidget {
       vehicleId: vehicle.id,
       stateId: selectedState.id,
     );
+  }
+
+  Future<void> _showDeleteVehicleDialog(
+    BuildContext context,
+    VehicleModel vehicle,
+  ) async {
+    final bool? confirmed = await showDialog<bool>(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return Dialog(
+          backgroundColor: backgroundColor,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const Text('Delete vehicle', style: head1TextStyle),
+                const SizedBox(height: 8),
+                Text(
+                  'Are you sure you want to delete ${vehicle.title}?',
+                  style: body1TextStyle,
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: SizedBox(
+                        height: 40,
+                        child: OutlinedButton(
+                          onPressed: () {
+                            Navigator.of(dialogContext).pop(false);
+                          },
+                          style: OutlinedButton.styleFrom(
+                            side: const BorderSide(color: primaryColor),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                          child: Text(
+                            'Cancel',
+                            style: accentButtonTextStyle.copyWith(color: primaryColor),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: AccentButton(
+                        title: 'Delete',
+                        onTap: () {
+                          Navigator.of(dialogContext).pop(true);
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+
+    if (confirmed == true) {
+      FleetStorage.removeVehicle(vehicleId: vehicle.id);
+    }
   }
 }

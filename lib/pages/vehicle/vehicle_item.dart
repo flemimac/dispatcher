@@ -11,6 +11,7 @@ class VehicleItem extends StatelessWidget {
   final VehicleStateModel state;
   final Function() onTap;
   final Function() onStateTap;
+  final Function()? onLongPress;
 
   const VehicleItem({
     super.key,
@@ -19,6 +20,7 @@ class VehicleItem extends StatelessWidget {
     required this.state,
     required this.onTap,
     required this.onStateTap,
+    this.onLongPress,
   });
 
   @override
@@ -33,6 +35,7 @@ class VehicleItem extends StatelessWidget {
         child: InkWell(
           borderRadius: BorderRadius.circular(8),
           onTap: onTap,
+          onLongPress: onLongPress,
           child: Padding(
             padding: const EdgeInsets.only(left: 8, right: 16),
             child: Row(

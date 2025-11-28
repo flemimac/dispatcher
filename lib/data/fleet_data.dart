@@ -62,7 +62,7 @@ class VehicleModel {
 class FleetStorage {
   FleetStorage._();
 
-  static final List<DriverModel> drivers = <DriverModel>[
+  static final List<DriverModel> _drivers = <DriverModel>[
     const DriverModel(
       id: 'driver_paul',
       name: 'Paul M.',
@@ -89,6 +89,11 @@ class FleetStorage {
       imageAsset: 'assets/images/account_circle.svg',
     ),
   ];
+
+  static final ValueNotifier<List<DriverModel>> driversNotifier =
+      ValueNotifier<List<DriverModel>>(List<DriverModel>.unmodifiable(_drivers));
+
+  static List<DriverModel> get drivers => driversNotifier.value;
 
   static final List<VehicleStateModel> vehicleStates = <VehicleStateModel>[
     const VehicleStateModel(
@@ -182,7 +187,7 @@ class FleetStorage {
   static List<VehicleModel> get vehicles => vehiclesNotifier.value;
 
   static final Map<String, DriverModel> _driversById = Map<String, DriverModel>.fromEntries(
-    drivers.map((DriverModel driver) => MapEntry<String, DriverModel>(driver.id, driver)),
+    _drivers.map((DriverModel driver) => MapEntry<String, DriverModel>(driver.id, driver)),
   );
 
   static final Map<String, VehicleStateModel> _statesById =
@@ -226,8 +231,45 @@ class FleetStorage {
     _emitVehicles();
   }
 
+  static void addVehicle({
+    required String title,
+    required String plate,
+    String? imageAsset,
+  }) {
+    final VehicleModel vehicle = VehicleModel(
+      id: 'vehicle_${DateTime.now().millisecondsSinceEpoch}',
+      title: title,
+      plate: plate,
+      imageAsset: imageAsset ?? 'assets/images/vehicle_car.svg',
+      driverId: null,
+      stateId: vehicleStates.first.id,
+    );
+    _vehicles.add(vehicle);
+    _emitVehicles();
+  }
+
+  static void removeVehicle({required String vehicleId}) {
+    _vehicles.removeWhere((VehicleModel vehicle) => vehicle.id == vehicleId);
+    _emitVehicles();
+  }
+
   static void _emitVehicles() {
     vehiclesNotifier.value = List<VehicleModel>.unmodifiable(_vehicles);
+  }
+
+  static void _emitDrivers() {
+    driversNotifier.value = List<DriverModel>.unmodifiable(_drivers);
+  }
+
+  static void addDriver({required String name}) {
+    final DriverModel driver = DriverModel(
+      id: 'driver_${DateTime.now().millisecondsSinceEpoch}',
+      name: name,
+      imageAsset: 'assets/images/account_circle.svg',
+    );
+    _drivers.add(driver);
+    _driversById[driver.id] = driver;
+    _emitDrivers();
   }
 
   static Future<void> refreshVehicles() async {

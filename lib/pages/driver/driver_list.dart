@@ -40,30 +40,34 @@ class _DriverListState extends State<DriverList> {
   }
 
   Widget _list() {
-    final List<DriverModel> drivers = FleetStorage.drivers;
-    return ListView.separated(
-      itemCount: drivers.length,
-      padding: EdgeInsets.only(
-        left: 16,
-        top: 16,
-        right: 16,
-        bottom: getListBottomPadding(context),
-      ),
-      separatorBuilder: (BuildContext context, int index) {
-        return const SizedBox(height: 8);
-      },
-      itemBuilder: (BuildContext context, int index) {
-        final DriverModel driver = drivers[index];
-        final bool isSelected = _selectedDriverId == driver.id;
-        return SelectableItem(
-          image: SvgPicture.asset(driver.imageAsset),
-          leftPadding: 8,
-          title: driver.name,
-          isSelected: isSelected,
-          onTap: () {
-            setState(() {
-              _selectedDriverId = driver.id;
-            });
+    return ValueListenableBuilder<List<DriverModel>>(
+      valueListenable: FleetStorage.driversNotifier,
+      builder: (BuildContext context, List<DriverModel> drivers, _) {
+        return ListView.separated(
+          itemCount: drivers.length,
+          padding: EdgeInsets.only(
+            left: 16,
+            top: 16,
+            right: 16,
+            bottom: getListBottomPadding(context),
+          ),
+          separatorBuilder: (BuildContext context, int index) {
+            return const SizedBox(height: 8);
+          },
+          itemBuilder: (BuildContext context, int index) {
+            final DriverModel driver = drivers[index];
+            final bool isSelected = _selectedDriverId == driver.id;
+            return SelectableItem(
+              image: SvgPicture.asset(driver.imageAsset),
+              leftPadding: 8,
+              title: driver.name,
+              isSelected: isSelected,
+              onTap: () {
+                setState(() {
+                  _selectedDriverId = driver.id;
+                });
+              },
+            );
           },
         );
       },
